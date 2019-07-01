@@ -30,10 +30,10 @@
     <ClCompile Include="src\TrafficObject.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\TrafficSimulator-Final.cpp">
+    <ClCompile Include="src\Vehicle.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vehicle.cpp">
+    <ClCompile Include="src\TrafficSimulator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

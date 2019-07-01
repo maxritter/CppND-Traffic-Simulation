@@ -134,7 +134,7 @@
     <ClCompile Include="src\Street.cpp" />
     <ClCompile Include="src\TrafficLight.cpp" />
     <ClCompile Include="src\TrafficObject.cpp" />
-    <ClCompile Include="src\TrafficSimulator-Final.cpp" />
+    <ClCompile Include="src\TrafficSimulator.cpp" />
     <ClCompile Include="src\Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>

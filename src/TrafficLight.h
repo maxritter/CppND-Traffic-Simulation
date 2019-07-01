@@ -7,42 +7,40 @@
 
 class vehicle;
 
-// TODO: FP.3 Define a class „MessageQueue“ which has the public methods send and receive. 
-// Send should take an rvalue reference of type TrafficLightPhase whereas receive should return this type. 
-// Also, the class should define an std::dequeue called _queue, which stores objects of type TrafficLightPhase. 
-// Also, there should be an std::condition_variable as well as an std::mutex as private members. 
+enum traffic_light_phase
+{
+	red,
+	green,
+};
 
 template <class T>
 class message_queue
 {
 public:
+	T receive();
+	void send(T&& msg);
 
 private:
-    
+	std::mutex mutex_;
+	std::condition_variable cond_;
+	std::deque<T> queue_;
 };
 
-// TODO: FP.1 : Define a class „TrafficLight“ which is a child class of TrafficObject. 
-// The class shall have the public methods „void waitForGreen()“ and „void simulate()“ 
-// as well as „TrafficLightPhase getCurrentPhase()“, where TrafficLightPhase is an enum that 
-// can be either „red“ or „green“. Also, add the private method „void cycleThroughPhases()“. 
-// Furthermore, there shall be the private member _currentPhase which can take „red“ or „green“ as its value. 
-
-class traffic_light
+class traffic_light final : public traffic_object
 {
 public:
-    // constructor / desctructor
+	traffic_light();
 
-    // getters / setters
+	traffic_light_phase get_current_phase() const;
 
-    // typical behaviour methods
+	void wait_for_green() const;
+	void simulate() override;
 
 private:
-    // typical behaviour methods
+	void cycle_through_phases();
 
-    // TODO: FP.4b : create a private member of type MessageQueue for messages of type TrafficLightPhase 
-    // and use it within the infinite loop to push each new TrafficLightPhase into it by calling 
-    // send in conjunction with move semantics.
-
-    std::condition_variable condition_;
-    std::mutex mutex_;
+	std::shared_ptr<message_queue<traffic_light_phase>> msg_queue_;
+	traffic_light_phase current_phase_;
+	std::condition_variable condition_;
+	std::mutex mutex_;
 };

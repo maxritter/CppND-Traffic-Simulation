@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "TrafficObject.h"
+#include "TrafficLight.h"
 
 class street;
 class vehicle;
@@ -37,11 +38,12 @@ public:
     std::vector<std::shared_ptr<street>> query_streets(const std::shared_ptr<street>& incoming); //Return pointer to current list of all outgoing streets
     void simulate() override;
     void vehicle_has_left(const std::shared_ptr<vehicle>& vehicle);
-    bool traffic_light_is_green();
+    bool traffic_light_is_green() const;
 
 private:
     void process_vehicle_queue();
 
+	traffic_light traffic_light_;
     std::vector<std::shared_ptr<street>> streets_;   //List of all streets connected to this intersection
     waiting_vehicles waiting_vehicles_;              //List of all vehicles and their associated promises waiting to enter the intersection
     bool is_blocked_;                                //Flag indicating wether the intersection is blocked by a vehicle
